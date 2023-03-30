@@ -1,21 +1,22 @@
 #include <stdio.h>
- 
-int power(int b,int e)
-{
-    if(e==0)
-        return 1;
-    else 
-        return (b*power(b,e-1));
-}
- 
+void printNaturalNumbers(int lowerLimit, int upperLimit);
 int main()
 {
-    int base,exponent;
-    printf("Enter the base\n");
-    scanf("%d",&base);
-    printf("Enter the exponent\n");
-    scanf("%d",&exponent);
+    int lowerLimit, upperLimit;
+    printf("Enter lower limit: ");
+    scanf("%d", &lowerLimit);
+    printf("Enter upper limit: ");
+    scanf("%d", &upperLimit);
 
-    printf("Power(%d^%d) = %d\n",base,exponent,power(base,exponent));
+    printf("All natural numbers from %d to %d are: ", lowerLimit, upperLimit);
+    printNaturalNumbers(lowerLimit, upperLimit);
+    
     return 0;
+}
+void printNaturalNumbers(int lowerLimit, int upperLimit)
+{
+    if(lowerLimit > upperLimit)
+        return;
+    printf("%d, ", lowerLimit);
+    printNaturalNumbers(lowerLimit + 1, upperLimit);
 }

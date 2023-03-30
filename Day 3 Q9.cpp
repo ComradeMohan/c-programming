@@ -1,44 +1,21 @@
 #include <stdio.h>
-int isPerfect(int num);
-void printPerfect(int start, int end);
+ 
+int power(int b,int e)
+{
+    if(e==0)
+        return 1;
+    else 
+        return (b*power(b,e-1));
+}
+ 
 int main()
 {
-    int start, end;
-    printf("Enter lower limit to print perfect numbers: ");
-    scanf("%d", &start);
-    printf("Enter upper limit to print perfect numbers: ");
-    scanf("%d", &end);
-    
-    printf("All perfect numbers between %d to %d are: \n", start, end);
-    printPerfect(start, end);
-    
+    int base,exponent;
+    printf("Enter the base\n");
+    scanf("%d",&base);
+    printf("Enter the exponent\n");
+    scanf("%d",&exponent);
+
+    printf("Power(%d^%d) = %d\n",base,exponent,power(base,exponent));
     return 0;
-}
-int isPerfect(int num)
-{
-    int i, sum;
-    sum = 0;
-    for(i=1; i<num; i++)
-    {
-        if(num % i == 0)
-        {
-            sum += i;
-        }
-    }
-    if(sum == num)
-        return 1;
-    else
-        return 0;
-}
-void printPerfect(int start, int end)
-{
-    while(start <= end)
-    {
-        if(isPerfect(start))
-        {
-            printf("%d, ", start);
-        }
-        
-        start++;
-    }   
 }
