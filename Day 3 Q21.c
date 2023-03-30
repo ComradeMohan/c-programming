@@ -1,53 +1,89 @@
+/**
+ * C program to reverse an array using pointers
+ */
+
 #include <stdio.h>
-#define MAX_SIZE 100    
-void inputArray(int *arr, int size);
-void printArray(int *arr, int size);
-void swapArray(int *sourceArr, int *destArr, int size);
+
+#define MAX_SIZE 100
+
+/* Function declaration */
+void printArr(int *arr, int size);
+
+
 int main()
 {
-    int sourceArr[MAX_SIZE];
-    int destArr[MAX_SIZE];
+    int arr[MAX_SIZE];
     int size;
+    int *left = arr;  // Pointer to arr[0]
+    int *right;
+
+
+    // Input size of array
     printf("Enter size of array: ");
     scanf("%d", &size);
-    printf("Enter %d elements in source array: ", size);
-    inputArray(sourceArr, size);
-    printf("Enter %d elements in destination array: ", size);
-    inputArray(destArr, size);
-    printf("\n\nSource array before swapping: ");
-    printArray(sourceArr, size);
-    printf("\nDestination array before swapping: ");
-    printArray(destArr, size);
-    swapArray(sourceArr, destArr, size);
-    printf("\n\nSource array after swapping: ");
-    printArray(sourceArr, size);
-    printf("\nDestination array after swapping: ");
-    printArray(destArr, size);
+
+    right = &arr[size - 1];  // Pointer to arr[size - 1]
+
+    /*
+     * Input elements in array
+     */
+    printf("Enter elements in array: ");
+    while(left <= right)
+    {
+        scanf("%d", left++);
+    }
+
+
+    printf("\nArray before reverse: ");
+    printArr(arr, size);
+
+
+    // Make sure that left points to arr[0]
+    left = arr;
+
+
+    // Loop to reverse array
+    while(left < right) 
+    {
+        /*
+         * Swap element from left of array to right of array.
+         */
+        *left    ^= *right;
+        *right   ^= *left;
+        *left    ^= *right;
+
+        // Increment left array pointer and decrement right array pointer
+        left++;
+        right--;
+    }
+
+
+    printf("\nArray after reverse: ");
+    printArr(arr, size);
+
+
     return 0;
 }
-void inputArray(int *arr, int size)
-{
-    int *arrEnd = (arr + (size - 1));
-    while(arr <= arrEnd)
-        scanf("%d", arr++);
-}
-void printArray(int *arr, int size)
-{
-    int *arrEnd = (arr + (size - 1));
-    while(arr <= arrEnd)
-        printf("%d, ", *(arr++));
-}
-void swapArray(int * sourceArr, int * destArr, int size)
-{
-    int * sourceArrEnd = (sourceArr + (size - 1));
 
-    int * destArrEnd   = (destArr + (size - 1));
-    while(sourceArr <= sourceArrEnd && destArr <= destArrEnd)
+
+
+/**
+ * Function to print array using pointer.
+ *
+ * @arr     Pointer to array.
+ * @size    Size of the array.
+ */
+void printArr(int * arr, int size)
+{
+    // Pointer to arr[size - 1]
+    int * arrEnd = (arr + size - 1);
+
+    /* Loop till last array element */
+    while(arr <= arrEnd)
     {
-        *sourceArr ^= *destArr;
-        *destArr   ^= *sourceArr;
-        *sourceArr ^= *destArr;
-        sourceArr++;
-        destArr++;
+        printf("%d, ", *arr);
+
+        // Move pointer to next array element.
+        arr++;
     }
 }
