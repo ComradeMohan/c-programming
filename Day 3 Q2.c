@@ -1,32 +1,45 @@
+/* 
+ * C program to find maximum and minimum between two numbers using functions
+ */
+
 #include <stdio.h>
-#include <math.h> 
-double getDiameter(double radius);
-double getCircumference(double radius);
-double getArea(double radius);
+
+/* Function declarations */
+int max(int num1, int num2);
+int min(int num1, int num2);
+
+
+
 int main() 
 {
-    float radius, dia, circ, area;
-    printf("Enter radius of circle: ");
-    scanf("%f", &radius);
-    dia  = getDiameter(radius);       
-    circ = getCircumference(radius); 
-    area = getArea(radius);           
-    printf("Diameter of the circle = %.2f units\n", dia);
-    printf("Circumference of the circle = %.2f units\n", circ);
-    printf("Area of the circle = %.2f sq. units", area);
-
+    int num1, num2, maximum, minimum;
+    
+    /* Input two numbers from user */
+    printf("Enter any two numbers: ");
+    scanf("%d%d", &num1, &num2);
+    
+    maximum = max(num1, num2);  // Call maximum function
+    minimum = min(num1, num2);  // Call minimum function
+    
+    printf("\nMaximum = %d\n", maximum);
+    printf("Minimum = %d", minimum);
+    
     return 0;
 }
-double getDiameter(double radius) 
+
+
+/**
+ * Find maximum between two numbers.
+ */
+int max(int num1, int num2)
 {
-    return (2 * radius);
-}
-double getCircumference(double radius) 
-{
-    return (2 * M_PI * radius); 
+    return (num1 > num2 ) ? num1 : num2;
 }
 
-double getArea(double radius)
+/**
+ * Find minimum between two numbers.
+ */
+int min(int num1, int num2) 
 {
-    return (M_PI * radius * radius); 
+    return (num1 > num2 ) ? num2 : num1;
 }
